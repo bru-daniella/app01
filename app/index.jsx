@@ -1,13 +1,57 @@
+import React, { useEffect, useState } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
+
+function Cronometro(){
+  
+  useEffect(() => {
+    let intervalo;
+
+    if(rodando && tempo > 0){
+      intervalo = setInterval(() => {
+        setTempo((valorAnterior) => valorAnterior - 1);
+      }, 1000);
+    }
+
+    function alterarTexto(){
+      useEffect(() => {
+        let textoCronometro;
+
+        if(rodando){
+          textoCronometro = "Pausar"
+        } else {
+          textoCronometro = "Iniciar"
+        }
+
+      return () => clearInterval(intervalo);
+      }, [rodando, tempo]);
+    }
+
+  return () => textoCronometro;
+  }, []);
+}
+
 export default function Index() {
+  const [rodando, setRodando] = useState(false);
+  function alternar(){
+    setRodando(!rodando);
+  }
+
+  const [tempo, setTempo] = useState(1500);
+  const minutos = String(Math.floor(tempo / 60)).padStart(2, "0");
+  const segundos = String(tempo % 60).padStart(2, "0");
+
+  
   return (
     <View style={style.container}>
       <Image style={style.image} source={require('./relogio.png')} />
       <View style={style.actions}>
-      <Text style={style.timer}>25:00</Text>
-      <Pressable style={style.button}>
-        <Text style={style.textButton}>Começar</Text>
+      <Text style={style.timer}>
+        {minutos}:{segundos}
+      </Text>
+      <Pressable onPress={alternar}
+      style={rodando ? style.buttonStart : style.buttonStop}>
+        <Text style={style.textButton}>{textoCronometro}</Text>
       </Pressable>
     </View>
     <View style={style.footer}>
@@ -17,6 +61,8 @@ export default function Index() {
     </View>
   );
 }
+
+
 
 const style = StyleSheet.create({
   container: {
@@ -46,8 +92,13 @@ const style = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
-  button: {
+  buttonStart: {
     backgroundColor: "#B872FF",
+    borderRadius: 32,
+    padding: 8
+  },
+  buttonStop: {
+    backgroundColor: "#82ff72",
     borderRadius: 32,
     padding: 8
   },
