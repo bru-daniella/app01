@@ -24,40 +24,40 @@ export default function Index() {
   }, [rodando, tempo]);
 
   return (
-    <View style={[style.container, { background: theme.colors.background }]}>
+    <View style={[styles.container, { background: theme.colors.background }]}>
 
       {/* Menu */}
 
-      <View style={[style.topo, { backgroundColor: theme.colors.primary }]}>
+      <View style={[styles.topo, { backgroundColor: theme.colors.primary }]}>
         <Pressable
-          style={style.botaoTopo}
+          style={styles.botaoTopo}
           onPress={() => router.push("/")}>
-          <Text style={style.textoBotaoTopo}>Home</Text>
+          <Text style={styles.textoBotaoTopo}>Home</Text>
         </Pressable>
         <Pressable
-          style={style.botaoTopo}
+          style={styles.botaoTopo}
           onPress={() => router.push("/telaA")}>
-          <Text style={style.textoBotaoTopo}>Tela A</Text>
+          <Text style={styles.textoBotaoTopo}>Tela A</Text>
         </Pressable>
         <Pressable
-          style={style.botaoTopo}
+          style={styles.botaoTopo}
           onPress={() => router.push("/telaB")}>
-          <Text style={style.textoBotaoTopo}>Tela B</Text>
+          <Text style={styles.textoBotaoTopo}>Tela B</Text>
         </Pressable>
       </View>
 
       {/* Relógio */}
 
-      <Image style={style.image} source={require('./relogio.png')} />
+      <Image style={styles.image} source={require('./relogio.png')} />
 
-      <View style={style.actions}>
-        <Text style={style.timer}>
+      <View style={styles.actions}>
+        <Text style={styles.timer}>
           {minutos}:{segundos}
         </Text>
         <Button mode="contained"
-          style={[rodando ? style.buttonStart : style.buttonStop,
+          style={[rodando ? styles.buttonStart : styles.buttonStop,
           { backgroundColor: rodando ? "#990000" : theme.colors.secondary }]}
-          lebelStyle={style.textButton}
+          lebelStyle={styles.textButton}
           onPress={() => {
             setRodando(!rodando);
             setExibeMensagem(true);
@@ -76,9 +76,9 @@ export default function Index() {
 
       {/* Footer */}
 
-      <View style={style.footer}>
-        <Text style={style.textfooter}>Curso de react</Text>
-        <Text style={style.textfooter}>2026 - Meu App</Text>
+      <View style={styles.footer}>
+        <Text style={styles.textfooter}>Curso de react</Text>
+        <Text style={styles.textfooter}>2026 - Meu App</Text>
       </View>
     </View>
   );
@@ -86,7 +86,7 @@ export default function Index() {
 
 
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",

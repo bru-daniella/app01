@@ -1,5 +1,6 @@
 import { useTheme } from "react-native-paper";
 import { FlatList, View } from "react-native-web";
+import ContatoItem from "./ContatoItem";
 
 export default function TelaB() {
     const theme = useTheme();
@@ -15,19 +16,53 @@ export default function TelaB() {
 
     return (
         <View style={[styles.container, {backgroundColor: theme.colors.background}]}>
-            <FlatList
+            <View style={styles.areaLista}>
+                <FlatList
                 data={contatos}
                 keyExtractor={(item) => item.id}
                 renderItem={({item, index}) => (
-                    <View
-                        style={[
-                            styles.card,
-                            {backgroundColor: index % 2 === 0 ? "#DDEEF2" : "F3DDE7"}
-                        ]}
-                    >
-                    
-                )}}
-            ></FlatList>
+                    <ContatoItem item={item} index={index} />
+                )}
+                contentContainerStyle={styles.lista}
+                showsVerticalScrollIndicator={false}
+                /> 
+            </View>
         </View>
-    )
+    );
 }
+
+const styles = StyleSheet.create({
+    container:{
+        flex: 1,
+    },
+    topo:{
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        paddingTop: 18,
+        paddingBottom: 14,
+        paddingHorizontal: 12
+    },
+    botaoTopo:{
+        paddingVertical: 8,
+        paddingHorizontal: 18,
+        backgroundColor: "#1d5db3",
+        borderRadius: 8
+    },
+    textBotaoTopo: {
+        color: "#FFFFFF",
+        fontWeight: "bold",
+        fontSize: 16
+    },
+    areaLista: {
+        flex: 1,
+        margin: 14,
+        backgroundColor: "#F5F5F5",
+        borderRadius: 6,
+        paddingHorizontal: 10,
+        paddingTop: 10
+    },
+    lista: {
+        paddingBottom: 10
+    }
+})
